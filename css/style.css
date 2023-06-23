@@ -8,9 +8,10 @@ body {
     font-family: Roboto;
 }
 
-.displayNone, .semQuizCriado.displayNone{
-    display: none;
+.pageBody{
+    margin-top: 69px;
 }
+
 
 
 
@@ -25,6 +26,8 @@ body {
     align-items: center;
     justify-content: center;
     position: absolute;
+    top: 0;
+    z-index: 99;
 }
 
 .header .title{
@@ -44,11 +47,103 @@ body {
 
 
 
+
 /*Quizes Questions CSS*/
 
 .quizQuestions{
     z-index: 3;
-    background-color: rgb(153, 153, 153);
+}
+
+.quizQuestionsHeader{
+    position: relative;
+    height: 227px;
+}
+
+.quizQuestions img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.quizQuestions .title{
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    color: white;
+    font-size: 39px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quizQuestions .quizQuestionsBody .questionHeader{
+    background-color: #EC362D;
+    color: white;
+    font-size: 19px;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    text-align: center;
+
+}
+
+.quizQuestions .quizQuestionsBody .questionOptions{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.quizQuestions .quizQuestionsBody .question{
+    background-color: white;
+    width: 759px;
+    height: fit-content;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto 15px auto;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
+}
+
+.quizQuestions .quizQuestionsBody .questionOptions .option{
+    width: 48%;
+    margin-top: 15px;
+    height: fit-content;
+}
+
+.quizQuestions .quizQuestionsBody .questionOptions .option.notSelected{
+    opacity: 0.3;
+    font-weight: 700;
+}
+
+.quizQuestions .quizQuestionsBody .questionOptions .option.selected{
+    font-weight: 700;
+}
+
+.quizQuestions .quizQuestionsBody .questionOptions .option.selected, .quizQuestions .quizQuestionsBody .questionOptions .option.notSelected{
+    color: red;
+}
+
+.quizQuestions .quizQuestionsBody .questionOptions .option.selected.right, .quizQuestions .quizQuestionsBody .questionOptions .option.notSelected.right{
+    color: #009C22;
+}
+
+
+.quizQuestions .quizQuestionsBody .questionOptions img{
+    width: 330px;
+    height: 175px;
+    object-fit: cover;
 }
 
 
@@ -175,11 +270,33 @@ body {
 
     /*Page CSS*/
 
-    .newQuiz, .quizQuestions, .quizesList{
-        padding: 69px 20px 0 20px;
+    .newQuiz, .quizQuestionsBody, .quizesList{
         margin: 0 auto;
-        width: 340px;
+        width: 375px;
     }
+
+
+
+
+    /*Quizes Questions CSS*/
+
+    .quizQuestions .quizQuestionsHeader{
+        height: 142px;
+    }
+    .quizQuestions .title{
+        font-size: 19px;
+    }
+
+    .quizQuestions .quizQuestionsBody .question{
+        width: 375px;
+        padding: 20px;
+    }
+
+    .quizQuestions .quizQuestionsBody .questionOptions img{
+        width: 163px;
+        height: 113px;
+    }
+
 
 
 
@@ -195,4 +312,10 @@ body {
     }
 
     
+}
+
+
+
+.displayNone, .semQuizCriado.displayNone{
+    display: none;
 }
