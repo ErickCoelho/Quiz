@@ -24,10 +24,6 @@ body {
     font-weight: 700;
 }
 
-.displayNone{
-    display: none;
-}
-
 .newQuiz{
     z-index: 3;
     background-color: rgb(222, 222, 222);
@@ -88,7 +84,7 @@ body {
 }
 
 .quizesList .list{
-    margin-bottom: 30px;
+    margin: 30px 0;
 }
 
 .quizesList .list .seusQuizesHeader{
@@ -149,6 +145,15 @@ body {
     border-radius: 5px;
 }
 
+
+
+.displayNone, .semQuizCriado.displayNone{
+    display: none;
+}
+
+{
+    display: none;
+}
 /* Estilos gerais aqui */
 
 
