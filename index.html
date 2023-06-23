@@ -1,17 +1,342 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>This a HTML model</title>
+    <title>Quizzy</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Hello World!</h1>
-    <p>This a HTML page model.</p>
+    
+    <div class="header">
+        <div class="title">Quizzy</div>
+    </div>
 
-    <!--<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>-->
+    <div class="pageBody">
+
+        <div class="newQuiz displayNone">
+
+            <div class="start displayNone">
+                <div class="title">Comece pelo começo</div>
+                <div class="inputGroup">
+                    <input 
+                        type="text"
+                        placeholder="Título"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="URL da imagem"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Quantidade de perguntas"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Quantidade de níveis"
+                    >
+                </div>
+                <button>Prosseguir pra criar perguntas</button>
+            </div>
+
+            <div class="createQuestions displayNone">
+                <div class="title">Crie suas perguntas</div>
+                <div class="inputGroup">
+                    <div class="title">Pergunta 1</div>
+                    <input 
+                        type="text"
+                        placeholder="Texto da pergunta"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Cor de fundo da pergunta"
+                    >
+                    <div class="title">Resposta correta</div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta correta"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem"
+                        >
+                    </div>
+                    <div class="title">Respostas incorretas</div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 1"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 1"
+                        >
+                    </div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 2"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 2"
+                        >
+                    </div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 3"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 3"
+                        >
+                    </div>
+                </div>
+                <div class="inputGroup">
+                    <div class="title">Pergunta 2</div>
+                    <input 
+                        type="text"
+                        placeholder="Texto da pergunta"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Cor de fundo da pergunta"
+                    >
+                    <div class="title">Resposta correta</div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta correta"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem"
+                        >
+                    </div>
+                    <div class="title">Respostas incorretas</div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 1"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 1"
+                        >
+                    </div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 2"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 2"
+                        >
+                    </div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 3"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 3"
+                        >
+                    </div>
+                </div>
+                <button>Prosseguir pra criar níveis</button>
+            </div>
+
+            <div class="levels displayNone">
+                <div class="title">Agora, decida os níveis!</div>
+                <div class="inputGroup">
+                    <div class="title">Nível 1</div>
+                    <input 
+                        type="text"
+                        placeholder="Agora, decida os níveis!"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="% de acerto mínima"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="URL da imagem do nível"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Descrição do nível"
+                    ></textarea>
+                </div>
+                <div class="inputGroup">
+                    <div class="title">Nível 2</div>
+                    <input 
+                        type="text"
+                        placeholder="Agora, decida os níveis!"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="% de acerto mínima"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="URL da imagem do nível"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Descrição do nível"
+                    ></textarea>
+                </div>
+                <button>Finalizar Quizz</button>
+            </div>
+
+            <div class="ready displayNone">
+                <div class="title">Seu quizz está pronto!</div>
+                <div class="readyImage">
+                    <img src="https://s2.glbimg.com/oEHVlonqI0BlBphzUs_rJpTL7kE=/e.glbimg.com/og/ed/f/original/2020/01/23/mit-campus.jpg">                
+                    <div class="quizTitle">O quão Potterhead é você?</div>
+                </div>
+                <div class="buttons">
+                    <button>Acessar Quizz</button>
+                    <button class="home">Voltar pra home</button>
+                </div>
+            </div>
+
+
+        </div>
+    
+    
+    
+    
+    
+        <div class="quizQuestions displayNone">
+            <div class="quizQuestionsHeader">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Wizarding_World_of_Harry_Potter_Castle.jpg">
+                <div class="title">O quão Potterhead é você?</div>
+            </div>
+
+            <div class="quizQuestionsBody">
+
+                <div class="question">
+                    <div class="questionHeader">Em qual animal Olho-Tonto Moody transfigurou Malfoy?</div>
+                    <div class="questionOptions">
+                        <div class="option">
+                            <img src="https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRRv9ICxXjK-LVFv-lKRId6gB45BFoNCLsZ4dk7bZpYGblPLPG-9aYss0Z0wt2PmWDb">
+                            <div class="text">Gato</div>
+                        </div>
+                        <div class="option">
+                            <img src="https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRRv9ICxXjK-LVFv-lKRId6gB45BFoNCLsZ4dk7bZpYGblPLPG-9aYss0Z0wt2PmWDb">
+                            <div class="text">Gato</div>
+                        </div>
+                        <div class="option">
+                            <img src="https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRRv9ICxXjK-LVFv-lKRId6gB45BFoNCLsZ4dk7bZpYGblPLPG-9aYss0Z0wt2PmWDb">
+                            <div class="text">Gato</div>
+                        </div>
+                        <div class="option">
+                            <img src="https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRRv9ICxXjK-LVFv-lKRId6gB45BFoNCLsZ4dk7bZpYGblPLPG-9aYss0Z0wt2PmWDb">
+                            <div class="text">Gato</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="questionHeader">Em qual animal Olho-Tonto Moody transfigurou Malfoy?</div>
+                    <div class="questionOptions">
+                        <div class="option notSelected">
+                            <img src="https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRRv9ICxXjK-LVFv-lKRId6gB45BFoNCLsZ4dk7bZpYGblPLPG-9aYss0Z0wt2PmWDb">
+                            <div class="text">Gato</div>
+                        </div>
+                        <div class="option notSelected">
+                            <img src="https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRRv9ICxXjK-LVFv-lKRId6gB45BFoNCLsZ4dk7bZpYGblPLPG-9aYss0Z0wt2PmWDb">
+                            <div class="text">Gato</div>
+                        </div>
+                        <div class="option selected">
+                            <img src="https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRRv9ICxXjK-LVFv-lKRId6gB45BFoNCLsZ4dk7bZpYGblPLPG-9aYss0Z0wt2PmWDb">
+                            <div class="text">Gato</div>
+                        </div>
+                        <div class="option right notSelected">
+                            <img src="https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRRv9ICxXjK-LVFv-lKRId6gB45BFoNCLsZ4dk7bZpYGblPLPG-9aYss0Z0wt2PmWDb">
+                            <div class="text">Gato</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question final">
+                    <div class="questionHeader">88% de acerto: Você é praticamente um aluno de Hogwarts!</div>
+                    <div class="questionOptions">
+                        <img src="https://t1.gstatic.com/licensed-image?q=tbn:ANd9GcRRv9ICxXjK-LVFv-lKRId6gB45BFoNCLsZ4dk7bZpYGblPLPG-9aYss0Z0wt2PmWDb">
+                        <div class="text">Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</div>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button class="restart">Reiniciar Quiz</button>
+                    <button class="home">Voltar pra home</button>
+                </div>
+
+            </div>
+        </div>
+    
+    
+    
+    
+    
+    
+    
+        <div class="quizesList">
+            <div class="semQuizCriado">
+                <div>Você não criou nenhum quiz ainda :(</div>
+                <button>Criar Quizzy</button>
+            </div>
+            
+            <div class="list seusQuizes displayNone">
+                <div class="seusQuizesHeader">
+                    <div class="title">Seus Quizes</div>
+                    <ion-icon name="add-circle"></ion-icon>
+                </div>
+                <ul>
+                    <li>
+                        <img src="https://uploads.metropoles.com/wp-content/uploads/2022/09/09161622/Simpsons-temporada-33-editado-2.jpg">                
+                        <div class="quizTitle">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
+                    </li>
+                    <li>
+                        <img src="https://uploads.metropoles.com/wp-content/uploads/2022/09/09161622/Simpsons-temporada-33-editado-2.jpg">                
+                        <div class="quizTitle">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
+                    </li>
+                    <li>
+                        <img src="https://uploads.metropoles.com/wp-content/uploads/2022/09/09161622/Simpsons-temporada-33-editado-2.jpg">                
+                        <div class="quizTitle">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="list todosQuizes">
+                <div class="title">Todos os Quizes</div>
+                <ul>
+                    <li>
+                        <img src="https://uploads.metropoles.com/wp-content/uploads/2022/09/09161622/Simpsons-temporada-33-editado-2.jpg">                
+                        <div class="quizTitle">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
+                    </li>
+                    <li>
+                        <img src="https://uploads.metropoles.com/wp-content/uploads/2022/09/09161622/Simpsons-temporada-33-editado-2.jpg">                
+                        <div class="quizTitle">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
+                    </li>
+                    <li>
+                        <img src="https://uploads.metropoles.com/wp-content/uploads/2022/09/09161622/Simpsons-temporada-33-editado-2.jpg">                
+                        <div class="quizTitle">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/scripts.js"></script>
 </body>
