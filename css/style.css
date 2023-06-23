@@ -47,6 +47,7 @@ body {
 
 .quizesList .semQuizCriado{
     height: 181px;
+    width: 340px;
     margin: 146px 195px;
     border-radius: 5px;
     border: 1px dashed #D4D4D4;
@@ -92,6 +93,14 @@ body {
     font-weight: 700;
 }
 
+.quizesList .list ul{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 1100px;
+}
+
 .quizesList .list ul li{
     width: 340px;
     height: 181px;
@@ -125,12 +134,18 @@ body {
 @media (max-width: 1100px) {
     .newQuiz, .quizQuestions, .quizesList{
         padding: 69px 20px 0 20px;
+        margin: 0 auto;
+        width: 340px;
     }
 
     .quizesList .semQuizCriado{
         width: 340px;
         margin: 30px auto;
-}
+    }
+
+    .quizesList .list ul{
+        width: 340px;
+    }
 
     
 }
