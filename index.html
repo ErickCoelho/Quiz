@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>This a HTML model</title>
+    <title>Quizzy</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
@@ -18,13 +18,205 @@
 
     <div class="pageBody">
 
-        <div class="newQuiz displayNone">a</div>
+        <div class="newQuiz ">
+
+            <div class="start displayNone">
+                <div class="title">Comece pelo começo</div>
+                <div class="inputGroup">
+                    <input 
+                        type="text"
+                        placeholder="Título"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="URL da imagem"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Quantidade de perguntas"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Quantidade de níveis"
+                    >
+                </div>
+                <button>Prosseguir pra criar perguntas</button>
+            </div>
+
+            <div class="createQuestions displayNone">
+                <div class="title">Crie suas perguntas</div>
+                <div class="inputGroup">
+                    <div class="title">Pergunta 1</div>
+                    <input 
+                        type="text"
+                        placeholder="Texto da pergunta"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Cor de fundo da pergunta"
+                    >
+                    <div class="title">Resposta correta</div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta correta"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem"
+                        >
+                    </div>
+                    <div class="title">Respostas incorretas</div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 1"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 1"
+                        >
+                    </div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 2"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 2"
+                        >
+                    </div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 3"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 3"
+                        >
+                    </div>
+                </div>
+                <div class="inputGroup">
+                    <div class="title">Pergunta 2</div>
+                    <input 
+                        type="text"
+                        placeholder="Texto da pergunta"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Cor de fundo da pergunta"
+                    >
+                    <div class="title">Resposta correta</div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta correta"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem"
+                        >
+                    </div>
+                    <div class="title">Respostas incorretas</div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 1"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 1"
+                        >
+                    </div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 2"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 2"
+                        >
+                    </div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 3"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 3"
+                        >
+                    </div>
+                </div>
+                <button>Prosseguir pra criar níveis</button>
+            </div>
+
+            <div class="levels displayNone">
+                <div class="title">Agora, decida os níveis!</div>
+                <div class="inputGroup">
+                    <div class="title">Nível 1</div>
+                    <input 
+                        type="text"
+                        placeholder="Agora, decida os níveis!"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="% de acerto mínima"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="URL da imagem do nível"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Descrição do nível"
+                    ></textarea>
+                </div>
+                <div class="inputGroup">
+                    <div class="title">Nível 2</div>
+                    <input 
+                        type="text"
+                        placeholder="Agora, decida os níveis!"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="% de acerto mínima"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="URL da imagem do nível"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Descrição do nível"
+                    ></textarea>
+                </div>
+                <button>Finalizar Quizz</button>
+            </div>
+
+            <div class="ready displayNone">
+                <div class="title">Seu quizz está pronto!</div>
+                <div class="readyImage">
+                    <img src="https://s2.glbimg.com/oEHVlonqI0BlBphzUs_rJpTL7kE=/e.glbimg.com/og/ed/f/original/2020/01/23/mit-campus.jpg">                
+                    <div class="quizTitle">O quão Potterhead é você?</div>
+                </div>
+                <div class="buttons">
+                    <button>Acessar Quizz</button>
+                    <button class="home">Voltar pra home</button>
+                </div>
+            </div>
+
+
+        </div>
     
     
     
     
     
-        <div class="quizQuestions ">
+        <div class="quizQuestions displayNone">
             <div class="quizQuestionsHeader">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Wizarding_World_of_Harry_Potter_Castle.jpg">
                 <div class="title">O quão Potterhead é você?</div>

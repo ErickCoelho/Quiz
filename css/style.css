@@ -42,7 +42,99 @@ body {
 
 .newQuiz{
     z-index: 3;
-    background-color: rgb(222, 222, 222);
+}
+
+.newQuiz .start, .newQuiz .createQuestions, .newQuiz .levels{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.newQuiz .title{
+    color: #000;
+    font-size: 20px;
+    font-family: Roboto;
+    font-weight: 700;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.newQuiz .inputGroup{
+    width: 600px;
+    height: fit-content;
+    margin: 0 auto 30px auto;
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+}
+
+.newQuiz .inputGroup .resposta{
+    margin-bottom: 15px;
+}
+
+.newQuiz .inputGroup input{
+    width: 100%;
+    height: 46px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #D1D1D1;
+}
+
+.newQuiz .inputGroup input::placeholder{
+    color: #BABABA;
+    font-size: 19px;
+    font-style: italic;
+    padding-left: 15px;
+}
+
+
+
+.newQuiz .ready .readyImage{
+    width: 500px;
+    height: 266px;
+    position: relative;
+    border-radius: 5px;
+    margin: 10px auto;
+}
+
+.newQuiz .ready .readyImage img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.newQuiz .ready .readyImage .quizTitle{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    padding: 15px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+    border-radius: 5px;
+    font-size: 23px;
+}
+
+.newQuiz .buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+.newQuiz button{
+    margin: 30px auto 0 auto;
+    width: 370px;
+    height: 54px;
+    border-radius: 10px;
+    border: none;
+    font-size: 21px;
+    background-color: #EC362D;
+    color: white;
 }
 
 
@@ -306,7 +398,7 @@ button.home{
 
 
 /* Mobile CSS */
-@media (max-width: 1100px) {
+@media (max-width: 600px) {
 
 
     /*Page CSS*/
@@ -314,6 +406,38 @@ button.home{
     .newQuiz, .quizQuestionsBody, .quizesList{
         margin: 0 auto;
         width: 375px;
+    }
+
+
+
+    /*New Quiz CSS*/
+    
+    .newQuiz .inputGroup{
+        width: 375px;
+    }
+
+    .newQuiz .inputGroup input{
+        width: 323px;
+        height: 54px;
+    }
+
+    .newQuiz .inputGroup input::placeholder{
+        font-size: 18px;
+    }
+
+    .newQuiz .ready .readyImage{
+        width: 340px;
+        height: 181px;
+    }
+    
+    .newQuiz .ready .readyImage .quizTitle{
+        font-size: 19px;
+    }
+
+    .newQuiz button{
+        width: 220px;
+        height: 44px;
+        font-size: 18px;
     }
 
 
@@ -379,6 +503,6 @@ button.home{
 
 
 
-.displayNone, .semQuizCriado.displayNone{
+.displayNone, .semQuizCriado.displayNone, .newQuiz .displayNone{
     display: none;
 }
