@@ -9,6 +9,7 @@ body {
 .header{
     background:#EC362D ; 
     height: 69px;
+    min-width: 340px;
     color : #fff;
     display: flex;
     align-items: center;
@@ -113,6 +114,10 @@ flex-direction: column;
 /* Estilos para telas menores */
 @media (max-width: 1100px) {
     /* Estilos específicos para telas menores aqui */
+    .quizesList .semQuizCriado{
+        width: 340px;
+        margin: 30px auto;
+}
 
     
-  }
+}
