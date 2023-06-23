@@ -1,0 +1,1 @@
+// como fazer um timer em js?

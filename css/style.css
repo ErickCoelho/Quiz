@@ -1,0 +1,18 @@
+* {
+    box-sizing: border-box;
+}
+
+/* Estilos para telas maiores */
+
+
+
+/* Estilos gerais aqui */
+
+
+
+/* Estilos para telas menores */
+@media (max-width: 768px) {
+    /* Estilos específicos para telas menores aqui */
+
+    
+  }
