@@ -4,22 +4,23 @@
 
 body {
     background-color: #FAFAFA;
+    font-family: Roboto;
 }
 
 .header{
     background:#EC362D ; 
+    width: 100%;
     height: 69px;
-    min-width: 340px;
     color : #fff;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
 }
 
 .header .title{
     color: #FFF;
     font-size: 37px;
-    font-family: Roboto;
     font-weight: 700;
 }
 
@@ -28,19 +29,20 @@ body {
 }
 
 .newQuiz{
-z-index: 3;
-background-color: rgb(222, 222, 222);
+    z-index: 3;
+    background-color: rgb(222, 222, 222);
 }
 
 .quizQuestions{
-z-index: 3;
-background-color: rgb(153, 153, 153);
+    z-index: 3;
+    background-color: rgb(153, 153, 153);
 }
 
 .quizesList{
-z-index: 2;
-display: flex;
-flex-direction: column;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .quizesList .semQuizCriado{
@@ -60,7 +62,6 @@ flex-direction: column;
     color: #B9B9B9;
     text-align: center;
     font-size: 20px;
-    font-family: Roboto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,7 +76,6 @@ flex-direction: column;
     color: #EC362D;
     text-align: center;
     font-size: 18px;
-    font-family: Roboto;
     transition: all 1s ease;
 }
 
@@ -86,25 +86,35 @@ flex-direction: column;
     font-size: 21px;
 }
 
+.quizesList .list .title{
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+}
+
 .quizesList .list ul li{
     width: 340px;
     height: 181px;
+    position: relative;
+    border-radius: 5px;
+    margin: 10px 0;
 }
 
 .quizesList .list ul li img{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .quizesList .list ul li .quizTitle{
-    width: 340px;
-    height: 181px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     color: white;
-    margin-top: -181px;
-    padding-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    background: linear-gradient(to top, red, transparent);
+    padding: 15px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+    border-radius: 5px;
 }
 
 /* Estilos gerais aqui */
@@ -113,7 +123,10 @@ flex-direction: column;
 
 /* Estilos para telas menores */
 @media (max-width: 1100px) {
-    /* Estilos específicos para telas menores aqui */
+    .newQuiz, .quizQuestions, .quizesList{
+        padding: 69px 20px 0 20px;
+    }
+
     .quizesList .semQuizCriado{
         width: 340px;
         margin: 30px auto;
