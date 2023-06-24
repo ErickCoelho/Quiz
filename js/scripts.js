@@ -78,6 +78,9 @@ function loadQuizzes(response){
 
 /*Quizes Questions CSS*/
 
+let rightAnswers = 0;
+let wrongAnswers = 0;
+
 function openQuiz(htmlElement){
     const geturl = `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${htmlElement.dataset.id}`;
     //console.log(geturl);
@@ -112,9 +115,9 @@ function showQuiz(response){
         `;
         question.answers.forEach(answer => {
             if(answer.isCorrectAnswer)
-                html += `<div class="option right">`;
+                html += `<div class="option right" onclick="selectAnswer(this)">`;
             else
-            html += `<div class="option">`;
+                html += `<div class="option" onclick="selectAnswer(this)">`;
             html += `
                     <img src="${answer.image}">
                     <div class="text">${answer.text}</div>
@@ -132,4 +135,23 @@ function showQuiz(response){
 
     const pageBodyTag = document.querySelector(".pageBody");
     pageBodyTag.innerHTML = html;
+}
+
+function selectAnswer(element){
+    const parentElement = element.parentElement;
+    const children = parentElement.children;
+
+    for(let i = 0; i < children.length; i++)
+        children[i].classList.add('notSelected');
+
+    element.classList.remove('notSelected');
+    element.classList.add('selected');
+
+    if(element.classList.contains('right'))
+        rightAnswers += 1;
+    else
+        wrongAnswers += 1;
+
+    console.log("Right: " + rightAnswers);
+    console.log("Wrong: " + wrongAnswers);
 }
