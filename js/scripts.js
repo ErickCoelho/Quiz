@@ -1,3 +1,5 @@
+/*Quizes List CSS*/
+
 function getQuizzes(){
     promiseQuizzes = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
 
@@ -10,6 +12,7 @@ function errorGetQuizzes(error){
 }
 
 function loadQuizzes(response){
+    let html = ``;
     if(false) //Com quizes próprios
         html=`
             <div class="quizesList">
@@ -51,8 +54,7 @@ function loadQuizzes(response){
         `;
 
     response.data.forEach(element => {
-        console.log(element);
-        console.log("________________");
+        //console.log(element);
         html+=`
             <li data-id="${element.id}" onclick="openQuiz(this)">
                 <img src=${element.image}>                
@@ -71,10 +73,15 @@ function loadQuizzes(response){
     pageBodyTag.innerHTML = html;
 }
 
+
+
+
+/*Quizes Questions CSS*/
+
 function openQuiz(htmlElement){
-    const html = `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${htmlElement.dataset.id}`;
-    console.log(html);
-    const promiseOpenQuiz = axios.get(html);
+    const geturl = `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${htmlElement.dataset.id}`;
+    //console.log(geturl);
+    const promiseOpenQuiz = axios.get(geturl);
 
     promiseOpenQuiz.then(showQuiz);
     promiseOpenQuiz.catch(errorOpenQuiz);
@@ -85,9 +92,42 @@ function errorOpenQuiz(error){
 }
 
 function showQuiz(response){
-    const html = "";
     console.log("TAMO DENTRO DO QUIZ");
-    console.log(response.data);
+    let html = ``;
+    html += `
+        <div class="quizQuestions">
+            <div class="quizQuestionsHeader">
+                <img src="${response.data.image}">
+                <div class="title">${response.data.title}</div>
+            </div>
+
+            <div class="quizQuestionsBody">
+    `;
+
+    response.data.questions.forEach(question => {
+        html += `
+            <div class="question">
+                <div class="questionHeader" style="background-color: ${question.color};">${question.title}</div>
+                <div class="questionOptions">
+        `;
+        question.answers.forEach(answer => {
+            if(answer.isCorrectAnswer)
+                html += `<div class="option right">`;
+            else
+            html += `<div class="option">`;
+            html += `
+                    <img src="${answer.image}">
+                    <div class="text">${answer.text}</div>
+                </div>
+            `;
+        });
+        html += `</div></div>`;
+    });
+
+    html += `
+    </div></div>
+    `;
+    //console.log(response.data);
     console.log("TAMO FORA DO QUIZ");
 
     const pageBodyTag = document.querySelector(".pageBody");
