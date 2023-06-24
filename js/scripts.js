@@ -78,8 +78,10 @@ function loadQuizzes(response){
 
 /*Quizes Questions CSS*/
 
+let totalQuestions = 0;
 let rightAnswers = 0;
-let wrongAnswers = 0;
+let totalAnswers = 0;
+let levelsList = [];
 
 function openQuiz(htmlElement){
     const geturl = `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${htmlElement.dataset.id}`;
@@ -95,7 +97,6 @@ function errorOpenQuiz(error){
 }
 
 function showQuiz(response){
-    console.log("TAMO DENTRO DO QUIZ");
     let html = ``;
     html += `
         <div class="quizQuestions">
@@ -125,13 +126,15 @@ function showQuiz(response){
             `;
         });
         html += `</div></div>`;
+        totalQuestions += 1;
     });
 
     html += `
     </div></div>
     `;
     //console.log(response.data);
-    console.log("TAMO FORA DO QUIZ");
+
+    levelsList = response.data.levels;
 
     const pageBodyTag = document.querySelector(".pageBody");
     pageBodyTag.innerHTML = html;
@@ -149,9 +152,45 @@ function selectAnswer(element){
 
     if(element.classList.contains('right'))
         rightAnswers += 1;
-    else
-        wrongAnswers += 1;
+    
+    totalAnswers += 1;
 
     console.log("Right: " + rightAnswers);
-    console.log("Wrong: " + wrongAnswers);
+
+    if(totalAnswers == totalQuestions)
+        showLevel();
+}
+
+function showLevel(){
+    const grade = (rightAnswers/totalAnswers)*100;
+    let i = 0;
+    let count = 0;
+    levelsList.forEach(level => {
+        if(level.minValue > levelsList[i].minValue && grade > level.minValue)
+            i = count;
+        count += 1;
+    });
+
+    let html = ``;
+    html += `
+        <div class="question final">
+            <div class="questionHeader">${levelsList[i].title}</div>
+            <div class="questionOptions">
+                <img src="${levelsList[i].image}">
+                <div class="text">${levelsList[i].text}</div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="restart">Reiniciar Quiz</button>
+            <button class="home">Voltar pra home</button>
+        </div>
+    `;
+
+    totalAnswers = 0;
+    rightAnswers = 0;
+    totalQuestions = 0;
+
+    const pageBodyTag = document.querySelector(".pageBody");
+    pageBodyTag.innerHTML += html;
 }
