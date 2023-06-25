@@ -141,24 +141,28 @@ function showQuiz(response){
 }
 
 function selectAnswer(element){
-    const parentElement = element.parentElement;
-    const children = parentElement.children;
+    if(!(element.classList.contains("selected") || element.classList.contains("notSelected"))){
+        const parentElement = element.parentElement;
+        const children = parentElement.children;
 
-    for(let i = 0; i < children.length; i++)
-        children[i].classList.add('notSelected');
+        for(let i = 0; i < children.length; i++)
+            children[i].classList.add('notSelected');
 
-    element.classList.remove('notSelected');
-    element.classList.add('selected');
+        element.classList.remove('notSelected');
+        element.classList.add('selected');
 
-    if(element.classList.contains('right'))
-        rightAnswers += 1;
-    
-    totalAnswers += 1;
+        if(element.classList.contains('right'))
+            rightAnswers += 1;
+        
+        totalAnswers += 1;
 
-    console.log("Right: " + rightAnswers);
+        console.log("Right: " + rightAnswers);
+        console.log("Answers: " + totalAnswers);
+        console.log("Questions: " + totalQuestions);
 
-    if(totalAnswers == totalQuestions)
-        showLevel();
+        if(totalAnswers == totalQuestions)
+            showLevel();
+    }
 }
 
 function showLevel(){
@@ -190,6 +194,10 @@ function showLevel(){
     totalAnswers = 0;
     rightAnswers = 0;
     totalQuestions = 0;
+
+    console.log("Right: " + rightAnswers);
+    console.log("Answers: " + totalAnswers);
+    console.log("Questions: " + totalQuestions);
 
     const pageBodyTag = document.querySelector(".pageBody");
     pageBodyTag.innerHTML += html;
