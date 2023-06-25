@@ -82,9 +82,11 @@ let totalQuestions = 0;
 let rightAnswers = 0;
 let totalAnswers = 0;
 let levelsList = [];
+let quizId = "";
 
 function openQuiz(htmlElement){
-    const geturl = `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${htmlElement.dataset.id}`;
+    quizId = htmlElement.dataset.id;
+    const geturl = `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${quizId}`;
     //console.log(geturl);
     const promiseOpenQuiz = axios.get(geturl);
 
@@ -97,6 +99,10 @@ function errorOpenQuiz(error){
 }
 
 function showQuiz(response){
+    totalQuestions = 0;
+    totalAnswers = 0;
+    rightAnswers = 0;
+
     let html = ``;
     html += `
         <div class="quizQuestions">
@@ -169,8 +175,9 @@ function showLevel(){
     const grade = (rightAnswers/totalAnswers)*100;
     let i = 0;
     let count = 0;
+
     levelsList.forEach(level => {
-        if(level.minValue > levelsList[i].minValue && grade > level.minValue)
+        if(level.minValue >= levelsList[i].minValue && grade >= level.minValue)
             i = count;
         count += 1;
     });
@@ -186,14 +193,10 @@ function showLevel(){
         </div>
 
         <div class="buttons">
-            <button class="restart">Reiniciar Quiz</button>
-            <button class="home">Voltar pra home</button>
+            <button class="restart" onclick="restarQuiz()">Reiniciar Quiz</button>
+            <button class="home" onclick="getQuizzes()">Voltar pra home</button>
         </div>
     `;
-
-    totalAnswers = 0;
-    rightAnswers = 0;
-    totalQuestions = 0;
 
     console.log("Right: " + rightAnswers);
     console.log("Answers: " + totalAnswers);
@@ -201,4 +204,13 @@ function showLevel(){
 
     const pageBodyTag = document.querySelector(".pageBody");
     pageBodyTag.innerHTML += html;
+}
+
+function restarQuiz(){
+    const geturl = `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${quizId}`;
+    //console.log(geturl);
+    const promiseOpenQuiz = axios.get(geturl);
+
+    promiseOpenQuiz.then(showQuiz);
+    promiseOpenQuiz.catch(errorOpenQuiz);
 }
