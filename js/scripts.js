@@ -20,7 +20,7 @@ function loadQuizzes(response){
                 <div class="list seusQuizes">
                     <div class="seusQuizesHeader">
                         <div class="title">Seus Quizes</div>
-                        <ion-icon name="add-circle"></ion-icon>
+                        <ion-icon name="add-circle" onclick="createQuizStart()"></ion-icon>
                     </div>
                     <ul>
                         <li>
@@ -46,7 +46,7 @@ function loadQuizzes(response){
             <div class="quizesList">
                 <div class="semQuizCriado">
                     <div>Você não criou nenhum quiz ainda :(</div>
-                    <button>Criar Quizzy</button>
+                    <button onclick="createQuizStart()">Criar Quizzy</button>
                 </div>
                 <div class="list todosQuizes">
                     <div class="title">Todos os Quizes</div>
@@ -213,4 +213,255 @@ function restarQuiz(){
 
     promiseOpenQuiz.then(showQuiz);
     promiseOpenQuiz.catch(errorOpenQuiz);
+}
+
+
+
+
+/*New Quiz CSS*/
+
+
+function createQuizStart(){
+
+    let html = ``;
+    html += `
+        <div class="newQuiz">
+
+            <div class="start">
+                <div class="title">Comece pelo começo</div>
+                <div class="inputGroup">
+                    <input 
+                        type="text"
+                        placeholder="Título"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="URL da imagem"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Quantidade de perguntas"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Quantidade de níveis"
+                    >
+                </div>
+                <button onclick="createQuizQuestions()">Prosseguir pra criar perguntas</button>
+            </div>
+
+        </div>
+    `;
+
+    const pageBodyTag = document.querySelector(".pageBody");
+    pageBodyTag.innerHTML = html;
+
+}
+
+function createQuizQuestions(){
+
+    let html = ``;
+    html += `
+        <div class="newQuiz">
+
+            <div class="createQuestions">
+                <div class="title">Crie suas perguntas</div>
+                <div class="inputGroup">
+                    <div class="title">Pergunta 1</div>
+                    <input 
+                        type="text"
+                        placeholder="Texto da pergunta"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Cor de fundo da pergunta"
+                    >
+                    <div class="title">Resposta correta</div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta correta"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem"
+                        >
+                    </div>
+                    <div class="title">Respostas incorretas</div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 1"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 1"
+                        >
+                    </div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 2"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 2"
+                        >
+                    </div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 3"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 3"
+                        >
+                    </div>
+                </div>
+                <div class="inputGroup">
+                    <div class="title">Pergunta 2</div>
+                    <input 
+                        type="text"
+                        placeholder="Texto da pergunta"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Cor de fundo da pergunta"
+                    >
+                    <div class="title">Resposta correta</div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta correta"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem"
+                        >
+                    </div>
+                    <div class="title">Respostas incorretas</div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 1"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 1"
+                        >
+                    </div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 2"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 2"
+                        >
+                    </div>
+                    <div class="resposta">
+                        <input 
+                            type="text"
+                            placeholder="Resposta incorreta 3"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem 3"
+                        >
+                    </div>
+                </div>
+                <button onclick="createQuizLevels()">Prosseguir pra criar níveis</button>
+            </div>
+
+        </div>
+    `;
+
+    const pageBodyTag = document.querySelector(".pageBody");
+    pageBodyTag.innerHTML = html;
+
+}
+
+function createQuizLevels(){
+
+    let html = ``;
+    html += `
+        <div class="newQuiz">
+
+            <div class="levels">
+                <div class="title">Agora, decida os níveis!</div>
+                <div class="inputGroup">
+                    <div class="title">Nível 1</div>
+                    <input 
+                        type="text"
+                        placeholder="Agora, decida os níveis!"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="% de acerto mínima"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="URL da imagem do nível"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Descrição do nível"
+                    ></textarea>
+                </div>
+                <div class="inputGroup">
+                    <div class="title">Nível 2</div>
+                    <input 
+                        type="text"
+                        placeholder="Agora, decida os níveis!"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="% de acerto mínima"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="URL da imagem do nível"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Descrição do nível"
+                    ></textarea>
+                </div>
+                <button onclick="createQuizReady()">Finalizar Quizz</button>
+            </div>
+
+        </div>
+    `;
+
+    const pageBodyTag = document.querySelector(".pageBody");
+    pageBodyTag.innerHTML = html;
+
+}
+
+function createQuizReady(){
+
+    let html = ``;
+    html += `
+        <div class="newQuiz">
+
+            <div class="ready">
+                <div class="title">Seu quizz está pronto!</div>
+                <div class="readyImage">
+                    <img src="https://s2.glbimg.com/oEHVlonqI0BlBphzUs_rJpTL7kE=/e.glbimg.com/og/ed/f/original/2020/01/23/mit-campus.jpg">                
+                    <div class="quizTitle">O quão Potterhead é você?</div>
+                </div>
+                <div class="buttons">
+                    <button>Acessar Quizz</button>
+                    <button class="home" onclick="getQuizzes()">Voltar pra home</button>
+                </div>
+            </div>
+
+        </div>
+    `;
+
+    const pageBodyTag = document.querySelector(".pageBody");
+    pageBodyTag.innerHTML = html;
+
 }

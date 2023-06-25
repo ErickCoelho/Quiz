@@ -77,6 +77,7 @@ body {
 .newQuiz .inputGroup input{
     width: 100%;
     height: 46px;
+    padding-left: 15px;
     margin-bottom: 10px;
     border-radius: 5px;
     border: 1px solid #D1D1D1;
@@ -86,7 +87,6 @@ body {
     color: #BABABA;
     font-size: 19px;
     font-style: italic;
-    padding-left: 15px;
 }
 
 .newQuiz .ready .readyImage{
