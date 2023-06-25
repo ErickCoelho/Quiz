@@ -220,6 +220,10 @@ function restarQuiz(){
 
 /*New Quiz CSS*/
 
+let title = "";
+let url = "";
+let nOfQuestions = "";
+let nOfLevels = "";
 
 function createQuizStart(){
 
@@ -233,21 +237,25 @@ function createQuizStart(){
                     <input 
                         type="text"
                         placeholder="Título"
+                        id="title"
                     >
                     <input 
                         type="text"
                         placeholder="URL da imagem"
+                        id="url"
                     >
                     <input 
-                        type="text"
+                        type="number"
                         placeholder="Quantidade de perguntas"
+                        id = "nOfQuestions"
                     >
                     <input 
-                        type="text"
+                        type="number"
                         placeholder="Quantidade de níveis"
+                        id = "nOfLevels"
                     >
                 </div>
-                <button onclick="createQuizQuestions()">Prosseguir pra criar perguntas</button>
+                <button onclick="validateStart()">Prosseguir pra criar perguntas</button>
             </div>
 
         </div>
@@ -258,7 +266,49 @@ function createQuizStart(){
 
 }
 
+function validateStart(){
+
+    const titleElement = document.getElementById('title');
+    title = titleElement.value;
+    
+    const urlElement = document.getElementById('url');
+    url = urlElement.value;
+    
+    const nOfQuestionsElement = document.getElementById('nOfQuestions');
+    nOfQuestions = nOfQuestionsElement.value;
+    
+    const nOfLevelsElement = document.getElementById('nOfLevels');
+    nOfLevels = nOfLevelsElement.value;
+
+    /*console.log(title.length);
+    console.log(validateUrl(url));
+    console.log(parseInt(nOfQuestions));
+    console.log(parseInt(nOfLevels));*/
+
+    if(title.length < 20)
+        alert("Title");
+    if(!validateUrl(url))
+        alert("url");
+    if(parseInt(nOfQuestions) < 2)
+        alert("nOfQuestions");
+    if(parseInt(nOfLevels) < 2)
+        alert("nOfLevels");
+
+    createQuizQuestions();
+
+}
+
+function validateUrl(urlValidation){
+    const urlRegex = new RegExp('^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$');
+
+    if(urlRegex.test(urlValidation))
+        return true;
+    else
+        return false;
+}
+
 function createQuizQuestions(){
+
 
     let html = ``;
     html += `
