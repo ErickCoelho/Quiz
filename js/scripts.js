@@ -485,8 +485,8 @@ function validateQuizQuestions(){
 
         if(questionCorrectAnswer !== "" && validateUrl(questionCorrectAnswerUrl)){
             const rightAnswerTemp ={
-                answer: questionCorrectAnswer,
-                url: questionCorrectAnswerUrl,
+                text: questionCorrectAnswer,
+                image: questionCorrectAnswerUrl,
                 isCorrectAnswer: true,
             };
             answersTemp.push(rightAnswerTemp);
@@ -513,8 +513,8 @@ function validateQuizQuestions(){
             if(currentVar !== ""){
                 if(validateUrl(currentVarUrl)){
                     const wrongAnswerTemp ={
-                        answer: currentVar,
-                        url: currentVarUrl,
+                        text: currentVar,
+                        image: currentVarUrl,
                         isCorrectAnswer: false,
                     };
     
@@ -683,7 +683,8 @@ function validateQuizLevels(){
         const levelTitle = levelTitleElement.value;
 
         const minGradeElement = questionElement.querySelector('#minGrade');
-        const minGrade = minGradeElement.value;
+        const minGradeString = minGradeElement.value;
+        const minGrade = parseInt(minGradeString);
 
         const levelUrlElement = questionElement.querySelector('#levelUrl');
         const levelUrl = levelUrlElement.value;
