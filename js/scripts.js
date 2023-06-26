@@ -12,11 +12,11 @@ function errorGetQuizzes(error){
 }
 
 function loadQuizzes(response){
-    console.log(localStorage.getItem("id"));
-    alert(localStorage.getItem("id"));
+    const storedData = localStorage.getItem("id");
+    const storedId = JSON.parse(storedData);
 
     let html = ``;
-    if(false) //Com quizes próprios
+    if(storedId.length !== 0){ //Com quizes próprios
         html=`
             <div class="quizesList">
                 
@@ -25,7 +25,9 @@ function loadQuizzes(response){
                         <div class="title">Seus Quizes</div>
                         <ion-icon name="add-circle" onclick="createQuizStart()"></ion-icon>
                     </div>
-                    <ul>
+                    <ul>`;
+                        
+        /*html+= `
                         <li>
                             <img src="https://uploads.metropoles.com/wp-content/uploads/2022/09/09161622/Simpsons-temporada-33-editado-2.jpg">                
                             <div class="quizTitle">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
@@ -37,14 +39,30 @@ function loadQuizzes(response){
                         <li>
                             <img src="https://uploads.metropoles.com/wp-content/uploads/2022/09/09161622/Simpsons-temporada-33-editado-2.jpg">                
                             <div class="quizTitle">Acerte os personagens corretos dos Simpsons e prove seu amor!</div>
-                        </li>
+                        </li>`;*/
+
+
+        response.data.forEach(element => {
+            //console.log(element);
+            console.log(storedId);
+            console.log(storedId);
+            if(storedId.includes(element.id))
+                html+=`
+                    <li data-id="${element.id}" onclick="getQuizId(this)">
+                        <img src=${element.image}>                
+                        <div class="quizTitle">${element.title}</div>
+                    </li>
+                `;
+        });
+
+        html += `
                     </ul>
                 </div>
                 <div class="list todosQuizes">
                     <div class="title">Todos os Quizes</div>
                     <ul>
-        `;
-    else
+        `;}
+    else{
         html=`
             <div class="quizesList">
                 <div class="semQuizCriado">
@@ -55,15 +73,19 @@ function loadQuizzes(response){
                     <div class="title">Todos os Quizes</div>
                     <ul>
         `;
+    }
 
     response.data.forEach(element => {
         //console.log(element);
-        html+=`
-            <li data-id="${element.id}" onclick="getQuizId(this)">
-                <img src=${element.image}>                
-                <div class="quizTitle">${element.title}</div>
-            </li>
-        `;
+        console.log(storedId);
+        console.log(storedId);
+        if(!storedId.includes(element.id))
+            html+=`
+                <li data-id="${element.id}" onclick="getQuizId(this)">
+                    <img src=${element.image}>                
+                    <div class="quizTitle">${element.title}</div>
+                </li>
+            `;
     });
 
     html +=`
@@ -523,6 +545,7 @@ function validateQuizQuestions(){
                 }
                 else{
                     alert(`A url da resposta errada ${j+1} na pergunta ${i+1} foi preenchido de maneira errada!`);
+                    alert(currentVarUrl);
                     return;
                 }
             }
@@ -546,16 +569,8 @@ function validateQuizQuestions(){
 
 
     }
+    
 
-    /*if(isValidateQuizQuestions){
-        questions = questionsTemp;
-        createQuizLevels();
-    }
-    else{
-        alert("6. Algum dos inputs não foi inserido corretamente!");
-        alert((isValidateQuizQuestions).toString);
-        createQuizQuestions();
-    }*/
     console.log("Cheguei Aqui!!!");
     alert("Cheguei Aqui!!!");
 
@@ -763,16 +778,34 @@ function createQuizError(error){
     alert("Erro na função postQuiz()");
 }
 
+function addIdLocalStorage(id){
+    let listaId = localStorage.getItem('id');
+
+    if(listaId)
+        listaId = JSON.parse(listaId);
+    else
+        listaId = [];
+
+    listaId.push(id);
+
+    const listaIdStringfy = JSON.stringify(listaId);
+
+    localStorage.setItem('id', listaIdStringfy);
+}
+
 function createQuizReady(response){
 
     console.log(levels);
 
-    let quizId = response.data;
+    let quizId = response.data.id;
 
+    console.log("########## quizId ##########");
     console.log(quizId);
+    console.log(localStorage.getItem('id'));
     alert(quizId);
 
-    localStorage.setItem("id", JSON.stringify(quizId));
+    addIdLocalStorage(quizId);
+    console.log(localStorage.getItem('id'));
 
     let html = ``;
     html += `
