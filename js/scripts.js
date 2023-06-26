@@ -1,6 +1,21 @@
 /*Quizes List CSS*/
 
+
+function showLoading(){
+    const loadHtml = `
+        <div class="loading">
+            <img src="https://olaargentina.com/wp-content/uploads/2019/11/loading-gif-transparent-10.gif">
+            <div>Carregando...</div>
+        </div>
+    `;
+
+    const pageBodyLoadTag = document.querySelector(".pageBody");
+    pageBodyLoadTag.innerHTML = loadHtml;
+}
+
 function getQuizzes(){
+    showLoading();
+
     promiseQuizzes = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
 
     promiseQuizzes.then(loadQuizzes);
@@ -117,6 +132,8 @@ function getQuizId(htmlElement){
 function openQuiz(quizId){
     const geturl = `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${quizId}`;
     //console.log(geturl);
+    showLoading();
+
     const promiseOpenQuiz = axios.get(geturl);
 
     promiseOpenQuiz.then(showQuiz);
@@ -247,6 +264,8 @@ function showLevel(){
 function restarQuiz(){
     const geturl = `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${quizId}`;
     //console.log(geturl);
+    showLoading();
+
     const promiseOpenQuiz = axios.get(geturl);
 
     promiseOpenQuiz.then(showQuiz);
@@ -283,7 +302,9 @@ function validateHex(hexValidation){
         return false;
 }
 
-function createQuizStart(){
+
+function createQuizStartLoaded(){
+    showLoading();
 
     title = "";
     url = "";
@@ -728,6 +749,7 @@ function postQuiz(){
     };
 
     //console.log(postObject);
+    showLoading();
 
     promiseCreateQuiz = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", postObject);
 

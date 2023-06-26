@@ -12,6 +12,23 @@ body {
     margin-top: 69px;
 }
 
+.loading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30vh;
+}
+
+.loading img{
+    width: 80px;
+}
+
+.loading div{
+    margin-top: 10px;
+    font-size: 13px;
+    color:#818181;
+}
 
 
 
