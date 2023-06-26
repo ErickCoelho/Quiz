@@ -44,8 +44,8 @@ function loadQuizzes(response){
 
         response.data.forEach(element => {
             //console.log(element);
-            console.log(storedId);
-            console.log(storedId);
+            //console.log(storedId);
+            //console.log(storedId);
             if(storedId.includes(element.id))
                 html+=`
                     <li data-id="${element.id}" onclick="getQuizId(this)">
@@ -77,8 +77,8 @@ function loadQuizzes(response){
 
     response.data.forEach(element => {
         //console.log(element);
-        console.log(storedId);
-        console.log(storedId);
+        //console.log(storedId);
+        //console.log(storedId);
         if(!storedId.includes(element.id))
             html+=`
                 <li data-id="${element.id}" onclick="getQuizId(this)">
@@ -127,6 +127,14 @@ function errorOpenQuiz(error){
     alert("Erro na função openQuiz()");
 }
 
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
 function showQuiz(response){
     totalQuestions = 0;
     totalAnswers = 0;
@@ -142,14 +150,15 @@ function showQuiz(response){
 
             <div class="quizQuestionsBody">
     `;
-
-    response.data.questions.forEach(question => {
+    const shuffleQuestions = shuffleArray(response.data.questions);
+    shuffleQuestions.forEach(question => {
         html += `
             <div class="question">
                 <div class="questionHeader" style="background-color: ${question.color};">${question.title}</div>
                 <div class="questionOptions">
         `;
-        question.answers.forEach(answer => {
+        const shuffleAnswers = shuffleArray(question.answers);
+        shuffleAnswers.forEach(answer => {
             if(answer.isCorrectAnswer)
                 html += `<div class="option right" onclick="selectAnswer(this)">`;
             else
@@ -191,9 +200,9 @@ function selectAnswer(element){
         
         totalAnswers += 1;
 
-        console.log("Right: " + rightAnswers);
-        console.log("Answers: " + totalAnswers);
-        console.log("Questions: " + totalQuestions);
+        //console.log("Right: " + rightAnswers);
+        //console.log("Answers: " + totalAnswers);
+        //console.log("Questions: " + totalQuestions);
 
         if(totalAnswers == totalQuestions)
             showLevel();
@@ -227,9 +236,9 @@ function showLevel(){
         </div>
     `;
 
-    console.log("Right: " + rightAnswers);
-    console.log("Answers: " + totalAnswers);
-    console.log("Questions: " + totalQuestions);
+    //console.log("Right: " + rightAnswers);
+    //console.log("Answers: " + totalAnswers);
+    //console.log("Questions: " + totalQuestions);
 
     const pageBodyTag = document.querySelector(".pageBody");
     pageBodyTag.innerHTML += html;
@@ -356,10 +365,10 @@ function validateStart(){
 
 function createQuizQuestions(){
 
-    console.log(title.length);
-    console.log(validateUrl(url));
-    console.log(parseInt(nOfQuestions));
-    console.log(parseInt(nOfLevels));
+    //console.log(title.length);
+    //console.log(validateUrl(url));
+    //console.log(parseInt(nOfQuestions));
+    //console.log(parseInt(nOfLevels));
 
 
     let html = ``;
@@ -461,7 +470,7 @@ function validateQuizQuestions(){
 
 
         const questionElement = document.querySelector(`.pergunta${i+1}`);
-        console.log(questionElement.innerHTML);
+        //console.log(questionElement.innerHTML);
 
         const questionTextElement = questionElement.querySelector('#questionText');
         const questionText = questionTextElement.value;
@@ -531,9 +540,9 @@ function validateQuizQuestions(){
         for(let j = 0; j < 3; j++){
             const currentVar = eval(`questionWrongAnswer${j+1}`);
             const currentVarUrl = eval(`questionWrongAnswerUrl${j+1}`);
-            console.log(`###### questionWrongAnswer${j+1}`)
-            console.log(currentVar);
-            console.log(currentVarUrl);
+            //console.log(`###### questionWrongAnswer${j+1}`)
+            //console.log(currentVar);
+            //console.log(currentVarUrl);
             
             if(currentVar !== ""){
                 if(validateUrl(currentVarUrl)){
@@ -547,9 +556,9 @@ function validateQuizQuestions(){
                     countWrongAnswers += 1;
                 }
                 else{
-                    console.log(`A url da resposta errada ${j+1} na pergunta ${i+1} foi preenchido de maneira errada!`);
+                    //console.log(`A url da resposta errada ${j+1} na pergunta ${i+1} foi preenchido de maneira errada!`);
                     alert(`A url da resposta errada ${j+1} na pergunta ${i+1} foi preenchido de maneira errada!`);
-                    alert(currentVarUrl);
+                    //alert(currentVarUrl);
                     return;
                 }
             }
@@ -566,7 +575,7 @@ function validateQuizQuestions(){
 			answers: answersTemp
         };
 
-        console.log(questionTemp);
+        //console.log(questionTemp);
 
         questions.push(questionTemp);
 
@@ -575,67 +584,17 @@ function validateQuizQuestions(){
     }
     
 
-    console.log("Cheguei Aqui!!!");
-    alert("Cheguei Aqui!!!");
+    //console.log("Cheguei Aqui!!!");
+    //alert("Cheguei Aqui!!!");
 
     createQuizLevels();
 }
 
 function createQuizLevels(){
-    console.log(questions);
+    //console.log(questions);
 
     let html = ``;
 
-    if(false)
-        html += `
-            <div class="newQuiz">
-
-                <div class="levels">
-                    <div class="title">Agora, decida os níveis!</div>
-                    <div class="inputGroup">
-                        <div class="title">Nível 1</div>
-                        <input 
-                            type="text"
-                            placeholder="Agora, decida os níveis!"
-                        >
-                        <input 
-                            type="text"
-                            placeholder="% de acerto mínima"
-                        >
-                        <input 
-                            type="text"
-                            placeholder="URL da imagem do nível"
-                        >
-                        <input 
-                            type="text"
-                            placeholder="Descrição do nível"
-                        ></textarea>
-                    </div>
-                    <div class="inputGroup">
-                        <div class="title">Nível 2</div>
-                        <input 
-                            type="text"
-                            placeholder="Agora, decida os níveis!"
-                        >
-                        <input 
-                            type="text"
-                            placeholder="% de acerto mínima"
-                        >
-                        <input 
-                            type="text"
-                            placeholder="URL da imagem do nível"
-                        >
-                        <input 
-                            type="text"
-                            placeholder="Descrição do nível"
-                        ></textarea>
-                    </div>
-                    <button onclick="validateQuizLevels()">Finalizar Quizz</button>
-                </div>
-
-            </div>
-        `;
-    else{
 
         html += `
             <div class="newQuiz">
@@ -679,7 +638,6 @@ function createQuizLevels(){
             </div>
         `;
 
-    }
 
     const pageBodyTag = document.querySelector(".pageBody");
     pageBodyTag.innerHTML = html;
@@ -696,7 +654,7 @@ function validateQuizLevels(){
 
 
         const questionElement = document.querySelector(`.level${i+1}`);
-        console.log(questionElement.innerHTML);
+        //console.log(questionElement.innerHTML);
 
         const levelTitleElement = questionElement.querySelector('#levelTitle');
         const levelTitle = levelTitleElement.value;
@@ -751,16 +709,16 @@ function validateQuizLevels(){
     levels = levelsTemp;
     
 
-    console.log("Cheguei Aqui!!!");
-    alert("Cheguei Aqui!!!");
+    //console.log("Cheguei Aqui!!!");
+    //alert("Cheguei Aqui!!!");
 
     postQuiz();
 }
 
 function postQuiz(){
 
-    console.log(levels);
-    console.log(questions);
+    //console.log(levels);
+    //console.log(questions);
 
     const postObject = {
         title: title,
@@ -769,7 +727,7 @@ function postQuiz(){
         levels: levels
     };
 
-    console.log(postObject);
+    //console.log(postObject);
 
     promiseCreateQuiz = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", postObject);
 
@@ -799,17 +757,17 @@ function addIdLocalStorage(id){
 
 function createQuizReady(response){
 
-    console.log(levels);
+    //console.log(levels);
 
     let quizId = response.data.id;
 
-    console.log("########## quizId ##########");
-    console.log(quizId);
-    console.log(localStorage.getItem('id'));
-    alert(quizId);
+    //console.log("########## quizId ##########");
+    //console.log(quizId);
+    //console.log(localStorage.getItem('id'));
+    //alert(quizId);
 
     addIdLocalStorage(quizId);
-    console.log(localStorage.getItem('id'));
+    //console.log(localStorage.getItem('id'));
 
 
     let html = ``;
