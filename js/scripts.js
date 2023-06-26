@@ -254,12 +254,16 @@ function showLevel(){
         </div>
     `;
 
+    html += '<div class="lastMessage"></div>';
+
     //console.log("Right: " + rightAnswers);
     //console.log("Answers: " + totalAnswers);
     //console.log("Questions: " + totalQuestions);
 
     const pageBodyTag = document.querySelector(".pageBody");
     pageBodyTag.innerHTML += html;
+    const lastMessage = document.querySelector('.lastMessage');
+    lastMessage.scrollIntoView();
 }
 
 function restarQuiz(){
