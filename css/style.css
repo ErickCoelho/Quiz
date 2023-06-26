@@ -50,6 +50,12 @@ body {
     align-items: center;
 }
 
+.newQuiz .start .inputGroup .validationWarning{
+    color: #EC362D;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
 .newQuiz .title{
     color: #000;
     font-size: 20px;
@@ -77,6 +83,7 @@ body {
 .newQuiz .inputGroup input{
     width: 100%;
     height: 46px;
+    padding-left: 15px;
     margin-bottom: 10px;
     border-radius: 5px;
     border: 1px solid #D1D1D1;
@@ -86,10 +93,7 @@ body {
     color: #BABABA;
     font-size: 19px;
     font-style: italic;
-    padding-left: 15px;
 }
-
-
 
 .newQuiz .ready .readyImage{
     width: 500px;
@@ -173,7 +177,7 @@ body {
     align-items: center;
 }
 
-.quizQuestions .quizQuestionsBody .questionHeader{
+.quizQuestions .questionHeader{
     background-color: #EC362D;
     color: white;
     font-size: 23px;
@@ -187,7 +191,7 @@ body {
 
 }
 
-.quizQuestions .quizQuestionsBody .question{
+.question{
     background-color: white;
     width: 759px;
     height: fit-content;
@@ -200,7 +204,7 @@ body {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
 }
 
-.quizQuestions .quizQuestionsBody .question .questionOptions{
+.question .questionOptions{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -208,49 +212,49 @@ body {
     width: 100%;
 }
 
-.quizQuestions .quizQuestionsBody .question .questionOptions .option{
+.question .questionOptions .option{
     width: fit-content;
     margin-top: 15px;
     height: fit-content;
 }
 
-.quizQuestions .quizQuestionsBody .question .questionOptions img{
+.question .questionOptions img{
     width: 330px;
     height: 175px;
     object-fit: cover;
 }
 
-.quizQuestions .quizQuestionsBody .question .questionOptions .option.notSelected{
+.question .questionOptions .option.notSelected{
     opacity: 0.3;
     font-weight: 700;
 }
 
-.quizQuestions .quizQuestionsBody .question .questionOptions .option.selected{
+.question .questionOptions .option.selected{
     font-weight: 700;
 }
 
-.quizQuestions .quizQuestionsBody .question .questionOptions .option.selected, .quizQuestions .quizQuestionsBody .question .questionOptions .option.notSelected{
+.question .questionOptions .option.selected, .question .questionOptions .option.notSelected{
     color: red;
 }
 
-.quizQuestions .quizQuestionsBody .question .questionOptions .option.selected.right, .quizQuestions .quizQuestionsBody .question .questionOptions .option.notSelected.right{
+.question .questionOptions .option.selected.right, .question .questionOptions .option.notSelected.right{
     color: #009C22;
 }
 
-.quizQuestions .quizQuestionsBody .question.final .questionOptions{
+.question.final .questionOptions{
     margin-top: 15px;
 }
 
-.quizQuestions .quizQuestionsBody .question.final .questionOptions img{
+.question.final .questionOptions img{
     width: 48%;
     height: 100%;
 }
 
-.quizQuestions .quizQuestionsBody .question.final .questionOptions .text{
+.question.final .questionOptions .text{
     width: 50%;
 }
 
-.quizQuestions .quizQuestionsBody .buttons{
+.buttons{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -259,7 +263,7 @@ body {
     margin: 60px auto 100px auto;
 }
 
-.quizQuestions .quizQuestionsBody .buttons button{
+.buttons button{
     width: 100%;
     height: 52px;
     border-radius: 10px;
@@ -388,6 +392,7 @@ button.home{
     position: absolute;
     bottom: 0;
     left: 0;
+    width: 100%;
     color: white;
     padding: 15px;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
@@ -453,32 +458,36 @@ button.home{
         font-size: 19px;
     }
 
-    .quizQuestions .quizQuestionsBody .question .questionHeader{
+    .question .questionHeader{
         font-size: 19px;
     }
 
-    .quizQuestions .quizQuestionsBody .question{
+    .question{
         width: 375px;
         padding: 20px;
         font-size: 13px;
     }
 
-    .quizQuestions .quizQuestionsBody .question .questionOptions img{
+    .question .questionOptions img{
         width: 163px;
         height: 113px;
     }
 
-    .quizQuestions .quizQuestionsBody .question.final .questionOptions img{
+    .question .questionOptions .text{
+        width: 163px;
+    }
+
+    .question.final .questionOptions img{
         width: 100%;
         height: 100%;
     }
 
-    .quizQuestions .quizQuestionsBody .question.final .questionOptions .text{
+    .question.final .questionOptions .text{
         margin-top: 15px;
         width: 100%;
     }
 
-    .quizQuestions .quizQuestionsBody .buttons button{
+    .buttons button{
         width: 220px;
         height: 44px;
         font-size: 18px;
