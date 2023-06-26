@@ -12,6 +12,9 @@ function errorGetQuizzes(error){
 }
 
 function loadQuizzes(response){
+    console.log(localStorage.getItem("id"));
+    alert(localStorage.getItem("id"));
+
     let html = ``;
     if(false) //Com quizes próprios
         html=`
@@ -56,7 +59,7 @@ function loadQuizzes(response){
     response.data.forEach(element => {
         //console.log(element);
         html+=`
-            <li data-id="${element.id}" onclick="openQuiz(this)">
+            <li data-id="${element.id}" onclick="getQuizId(this)">
                 <img src=${element.image}>                
                 <div class="quizTitle">${element.title}</div>
             </li>
@@ -84,8 +87,12 @@ let totalAnswers = 0;
 let levelsList = [];
 let quizId = "";
 
-function openQuiz(htmlElement){
+function getQuizId(htmlElement){
     quizId = htmlElement.dataset.id;
+    openQuiz(quizId);
+}
+
+function openQuiz(quizId){
     const geturl = `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${quizId}`;
     //console.log(geturl);
     const promiseOpenQuiz = axios.get(geturl);
@@ -224,8 +231,34 @@ let title = "";
 let url = "";
 let nOfQuestions = "";
 let nOfLevels = "";
+let questions = [];
+let levels = [];
+
+function validateUrl(urlValidation){
+    const urlRegex = new RegExp('^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$');
+
+    if(urlRegex.test(urlValidation))
+        return true;
+    else
+        return false;
+}
+
+function validateHex(hexValidation){
+    const hexRegex = new RegExp('^#[0-9A-Fa-f]{6}$');
+
+    if(hexRegex.test(hexValidation))
+        return true;
+    else
+        return false;
+}
 
 function createQuizStart(){
+
+    title = "";
+    url = "";
+    nOfQuestions = "";
+    nOfLevels = "";
+    questions = [];
 
     let html = ``;
     html += `
@@ -280,149 +313,113 @@ function validateStart(){
     const nOfLevelsElement = document.getElementById('nOfLevels');
     nOfLevels = nOfLevelsElement.value;
 
-    /*console.log(title.length);
-    console.log(validateUrl(url));
-    console.log(parseInt(nOfQuestions));
-    console.log(parseInt(nOfLevels));*/
 
-    if(title.length < 20)
-        alert("Title");
-    if(!validateUrl(url))
-        alert("url");
-    if(parseInt(nOfQuestions) < 2)
-        alert("nOfQuestions");
-    if(parseInt(nOfLevels) < 2)
-        alert("nOfLevels");
+    if(title.length < 20 || !validateUrl(url) || parseInt(nOfQuestions) < 3 || parseInt(nOfLevels) < 2){
+       
+        if(title.length < 20)
+            alert(`O título deve ter mais de 20 caractéres`);
+            
+        if(!validateUrl(url))
+            alert(`A entrada dever ter o formato de uma URL`);
+            
+        if(parseInt(nOfQuestions) < 3)
+            alert(`O número mínimo de questões é 3`);
 
-    createQuizQuestions();
-
-}
-
-function validateUrl(urlValidation){
-    const urlRegex = new RegExp('^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$');
-
-    if(urlRegex.test(urlValidation))
-        return true;
+        if(parseInt(nOfLevels) < 2)
+        alert(`O número mínimo de níveis é 2`);
+    }
     else
-        return false;
+        createQuizQuestions();
 }
 
 function createQuizQuestions(){
 
+    console.log(title.length);
+    console.log(validateUrl(url));
+    console.log(parseInt(nOfQuestions));
+    console.log(parseInt(nOfLevels));
+
 
     let html = ``;
+    
     html += `
         <div class="newQuiz">
 
             <div class="createQuestions">
                 <div class="title">Crie suas perguntas</div>
-                <div class="inputGroup">
-                    <div class="title">Pergunta 1</div>
+    `;
+    
+    for(let i = 0; i < parseInt(nOfQuestions); i++){
+        html += `
+            <div class="inputGroup pergunta${i+1}">
+                <div class="title">Pergunta ${i+1}</div>
+                <input 
+                    type="text"
+                    placeholder="Texto da pergunta"
+                    id="questionText"
+                >
+                <input 
+                    type="text"
+                    placeholder="Cor de fundo da pergunta"
+                    id="questionColor"
+                >
+                <div class="title">Resposta correta</div>
+                <div class="resposta">
                     <input 
                         type="text"
-                        placeholder="Texto da pergunta"
+                        placeholder="Resposta correta"
+                        id="questionCorrectAnswer"
                     >
                     <input 
                         type="text"
-                        placeholder="Cor de fundo da pergunta"
+                        placeholder="URL da imagem"
+                        id="questionCorrectAnswerUrl"
                     >
-                    <div class="title">Resposta correta</div>
-                    <div class="resposta">
-                        <input 
-                            type="text"
-                            placeholder="Resposta correta"
-                        >
-                        <input 
-                            type="text"
-                            placeholder="URL da imagem"
-                        >
-                    </div>
-                    <div class="title">Respostas incorretas</div>
-                    <div class="resposta">
-                        <input 
-                            type="text"
-                            placeholder="Resposta incorreta 1"
-                        >
-                        <input 
-                            type="text"
-                            placeholder="URL da imagem 1"
-                        >
-                    </div>
-                    <div class="resposta">
-                        <input 
-                            type="text"
-                            placeholder="Resposta incorreta 2"
-                        >
-                        <input 
-                            type="text"
-                            placeholder="URL da imagem 2"
-                        >
-                    </div>
-                    <div class="resposta">
-                        <input 
-                            type="text"
-                            placeholder="Resposta incorreta 3"
-                        >
-                        <input 
-                            type="text"
-                            placeholder="URL da imagem 3"
-                        >
-                    </div>
                 </div>
-                <div class="inputGroup">
-                    <div class="title">Pergunta 2</div>
+                <div class="title">Respostas incorretas</div>
+                <div class="resposta">
                     <input 
                         type="text"
-                        placeholder="Texto da pergunta"
+                        placeholder="Resposta incorreta 1"
+                        id="questionWrongAnswer1"
                     >
                     <input 
                         type="text"
-                        placeholder="Cor de fundo da pergunta"
+                        placeholder="URL da imagem 1"
+                        id="questionWrongAnswerUrl1"
                     >
-                    <div class="title">Resposta correta</div>
-                    <div class="resposta">
-                        <input 
-                            type="text"
-                            placeholder="Resposta correta"
-                        >
-                        <input 
-                            type="text"
-                            placeholder="URL da imagem"
-                        >
-                    </div>
-                    <div class="title">Respostas incorretas</div>
-                    <div class="resposta">
-                        <input 
-                            type="text"
-                            placeholder="Resposta incorreta 1"
-                        >
-                        <input 
-                            type="text"
-                            placeholder="URL da imagem 1"
-                        >
-                    </div>
-                    <div class="resposta">
-                        <input 
-                            type="text"
-                            placeholder="Resposta incorreta 2"
-                        >
-                        <input 
-                            type="text"
-                            placeholder="URL da imagem 2"
-                        >
-                    </div>
-                    <div class="resposta">
-                        <input 
-                            type="text"
-                            placeholder="Resposta incorreta 3"
-                        >
-                        <input 
-                            type="text"
-                            placeholder="URL da imagem 3"
-                        >
-                    </div>
                 </div>
-                <button onclick="createQuizLevels()">Prosseguir pra criar níveis</button>
+                <div class="resposta">
+                    <input 
+                        type="text"
+                        placeholder="Resposta incorreta 2"
+                        id="questionWrongAnswer2"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="URL da imagem 2"
+                        id="questionWrongAnswerUrl2"
+                    >
+                </div>
+                <div class="resposta">
+                    <input 
+                        type="text"
+                        placeholder="Resposta incorreta 3"
+                        id="questionWrongAnswer3"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="URL da imagem 3"
+                        id="questionWrongAnswerUrl3"
+                    >
+                </div>
+            </div>
+        `;
+
+    }
+    
+    html += `
+                <button onclick="validateQuizQuestions()">Prosseguir pra criar níveis</button>
             </div>
 
         </div>
@@ -431,66 +428,350 @@ function createQuizQuestions(){
     const pageBodyTag = document.querySelector(".pageBody");
     pageBodyTag.innerHTML = html;
 
+}
+
+function validateQuizQuestions(){
+
+    //let isValidateQuizQuestions = true;
+    questions = [];
+
+    for(let i = 0; i < parseInt(nOfQuestions); i++){
+
+
+        const questionElement = document.querySelector(`.pergunta${i+1}`);
+        console.log(questionElement.innerHTML);
+
+        const questionTextElement = questionElement.querySelector('#questionText');
+        const questionText = questionTextElement.value;
+
+        const questionColorElement = questionElement.querySelector('#questionColor');
+        const questionColor = questionColorElement.value;
+
+        const questionCorrectAnswerElement = questionElement.querySelector('#questionCorrectAnswer');
+        const questionCorrectAnswer = questionCorrectAnswerElement.value;
+
+        const questionCorrectAnswerUrlElement = questionElement.querySelector('#questionCorrectAnswerUrl');
+        const questionCorrectAnswerUrl = questionCorrectAnswerUrlElement.value;
+
+        const questionWrongAnswer1Element = questionElement.querySelector('#questionWrongAnswer1');
+        const questionWrongAnswer1 = questionWrongAnswer1Element.value;
+
+        const questionWrongAnswerUrl1Element = questionElement.querySelector('#questionWrongAnswerUrl1');
+        const questionWrongAnswerUrl1 = questionWrongAnswerUrl1Element.value;
+
+        const questionWrongAnswer2Element = questionElement.querySelector('#questionWrongAnswer2');
+        const questionWrongAnswer2 = questionWrongAnswer2Element.value;
+
+        const questionWrongAnswerUrl2Element = questionElement.querySelector('#questionWrongAnswerUrl2');
+        const questionWrongAnswerUrl2 = questionWrongAnswerUrl2Element.value;
+
+        const questionWrongAnswer3Element = questionElement.querySelector('#questionWrongAnswer3');
+        const questionWrongAnswer3 = questionWrongAnswer3Element.value;
+
+        const questionWrongAnswerUrl3Element = document.querySelector('#questionWrongAnswerUrl3');
+        const questionWrongAnswerUrl3 = questionWrongAnswerUrl3Element.value;
+
+        if(questionText.length < 20){
+            alert(`O texto da pergunta ${i+1} deve ter no mínimo 20 caracteres!`);
+            return;
+        }
+        
+        if(!validateHex(questionColor)){
+            alert(`A cor de fundo da pergunta ${i+1} deve ser escrita no formato de um hexadecimal!`);
+            return;
+        }
+
+        let answersTemp = [];
+
+        if(questionCorrectAnswer !== "" && validateUrl(questionCorrectAnswerUrl)){
+            const rightAnswerTemp ={
+                answer: questionCorrectAnswer,
+                url: questionCorrectAnswerUrl,
+                isCorrectAnswer: true,
+            };
+            answersTemp.push(rightAnswerTemp);
+        }
+        else{
+            if(!validateUrl(questionCorrectAnswerUrl)){
+                alert(`A URL da resposta correta na pergunta ${i+1} foi preenchido de maneira errada!`);
+                return;
+            }
+            if(questionCorrectAnswer === ""){
+                alert(`O texto da resposta correta na pergunta ${i+1} está vazio!`);
+                return;
+            }
+        }
+            
+
+
+
+        let countWrongAnswers = 0;
+        for(let j = 0; j < 3; j++){
+            const currentVar = eval(`questionWrongAnswer${j+1}`);
+            const currentVarUrl = eval(`questionWrongAnswerUrl${j+1}`);
+            
+            if(currentVar !== ""){
+                if(validateUrl(currentVarUrl)){
+                    const wrongAnswerTemp ={
+                        answer: currentVar,
+                        url: currentVarUrl,
+                        isCorrectAnswer: false,
+                    };
+    
+                    answersTemp.push(wrongAnswerTemp);
+                    countWrongAnswers += 1;
+                }
+                else{
+                    alert(`A url da resposta errada ${j+1} na pergunta ${i+1} foi preenchido de maneira errada!`);
+                    return;
+                }
+            }
+        }
+        if(countWrongAnswers === 0){
+            alert(`Preencha ao menos uma resposta incorreta de maneira completa na pergunta ${i+1}`);
+            return;
+        }
+
+
+        let questionTemp = {
+            title: questionText,
+			color: questionColor,
+			answers: answersTemp
+        };
+
+        console.log(questionTemp);
+
+        questions.push(questionTemp);
+
+
+
+    }
+
+    /*if(isValidateQuizQuestions){
+        questions = questionsTemp;
+        createQuizLevels();
+    }
+    else{
+        alert("6. Algum dos inputs não foi inserido corretamente!");
+        alert((isValidateQuizQuestions).toString);
+        createQuizQuestions();
+    }*/
+    console.log("Cheguei Aqui!!!");
+    alert("Cheguei Aqui!!!");
+
+    createQuizLevels();
 }
 
 function createQuizLevels(){
+    console.log(questions);
 
     let html = ``;
-    html += `
-        <div class="newQuiz">
 
-            <div class="levels">
-                <div class="title">Agora, decida os níveis!</div>
-                <div class="inputGroup">
-                    <div class="title">Nível 1</div>
-                    <input 
-                        type="text"
-                        placeholder="Agora, decida os níveis!"
-                    >
-                    <input 
-                        type="text"
-                        placeholder="% de acerto mínima"
-                    >
-                    <input 
-                        type="text"
-                        placeholder="URL da imagem do nível"
-                    >
-                    <input 
-                        type="text"
-                        placeholder="Descrição do nível"
-                    ></textarea>
+    if(false)
+        html += `
+            <div class="newQuiz">
+
+                <div class="levels">
+                    <div class="title">Agora, decida os níveis!</div>
+                    <div class="inputGroup">
+                        <div class="title">Nível 1</div>
+                        <input 
+                            type="text"
+                            placeholder="Agora, decida os níveis!"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="% de acerto mínima"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem do nível"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="Descrição do nível"
+                        ></textarea>
+                    </div>
+                    <div class="inputGroup">
+                        <div class="title">Nível 2</div>
+                        <input 
+                            type="text"
+                            placeholder="Agora, decida os níveis!"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="% de acerto mínima"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="URL da imagem do nível"
+                        >
+                        <input 
+                            type="text"
+                            placeholder="Descrição do nível"
+                        ></textarea>
+                    </div>
+                    <button onclick="validateQuizLevels()">Finalizar Quizz</button>
                 </div>
-                <div class="inputGroup">
-                    <div class="title">Nível 2</div>
-                    <input 
-                        type="text"
-                        placeholder="Agora, decida os níveis!"
-                    >
-                    <input 
-                        type="text"
-                        placeholder="% de acerto mínima"
-                    >
-                    <input 
-                        type="text"
-                        placeholder="URL da imagem do nível"
-                    >
-                    <input 
-                        type="text"
-                        placeholder="Descrição do nível"
-                    ></textarea>
-                </div>
-                <button onclick="createQuizReady()">Finalizar Quizz</button>
+
             </div>
+        `;
+    else{
 
-        </div>
-    `;
+        html += `
+            <div class="newQuiz">
+    
+                <div class="levels">
+                    <div class="title">Agora, decida os níveis!</div>
+        `;
+    
+        for(let i = 0; i < parseInt(nOfLevels); i++){
+            html += `
+                <div class="inputGroup level${i+1}">
+                    <div class="title">Nível ${i+1}</div>
+                    <input 
+                        type="text"
+                        placeholder="Título do nível"
+                        id="levelTitle"
+                    >
+                    <input 
+                        type="number"
+                        placeholder="% de acerto mínima"
+                        id="minGrade"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="URL da imagem do nível"
+                        id="levelUrl"
+                    >
+                    <input 
+                        type="text"
+                        placeholder="Descrição do nível"
+                        id="levelDescription"
+                    ></textarea>
+                </div>
+            `;
+        }
+    
+        html += `
+                <button onclick="validateQuizLevels()">Finalizar Quizz</button>
+                </div>
+    
+            </div>
+        `;
+
+    }
 
     const pageBodyTag = document.querySelector(".pageBody");
     pageBodyTag.innerHTML = html;
 
 }
 
-function createQuizReady(){
+function validateQuizLevels(){
+
+    //let isValidateQuizQuestions = true;
+    let acertoZero = false;
+
+    let levelsTemp = [];
+    for(let i = 0; i < parseInt(nOfLevels); i++){
+
+
+        const questionElement = document.querySelector(`.level${i+1}`);
+        console.log(questionElement.innerHTML);
+
+        const levelTitleElement = questionElement.querySelector('#levelTitle');
+        const levelTitle = levelTitleElement.value;
+
+        const minGradeElement = questionElement.querySelector('#minGrade');
+        const minGrade = minGradeElement.value;
+
+        const levelUrlElement = questionElement.querySelector('#levelUrl');
+        const levelUrl = levelUrlElement.value;
+
+        const levelDescriptionElement = questionElement.querySelector('#levelDescription');
+        const levelDescription = levelDescriptionElement.value;
+
+        if(levelTitle.length < 10){
+            alert(`O título do nível ${i+1} deve ter no mínimo 10 caracteres!`);
+            return;
+        }
+
+        if(minGrade < 0 || minGrade > 100){
+            alert(`O "% de acerto mínima" do nível ${i+1} deve estar entre 0 e 100!`);
+            return;
+        }
+
+        if(!validateUrl(levelUrl)){
+            alert(`A URL do nível ${i+1} foi preenchido de maneira errada!`);
+            return;
+        }
+
+        if(levelDescription.length < 30){
+            alert(`A descrição do nível ${i+1} deve ter no mínimo 30 caracteres!`);
+            return;
+        }
+
+        if(minGrade == 0)
+            acertoZero = true;
+
+        levelsTemp.push({
+			title: levelTitle,
+			image: levelUrl,
+			text: levelDescription,
+			minValue: minGrade
+        });
+        
+    }
+
+    if(!acertoZero){
+        alert(`Deve haver ao menos um nível com "% de acerto mínima" igual a zero!`);
+        return;
+    }
+    
+    levels = levelsTemp;
+    
+
+    console.log("Cheguei Aqui!!!");
+    alert("Cheguei Aqui!!!");
+
+    postQuiz();
+}
+
+function postQuiz(){
+
+    console.log(levels);
+    console.log(questions);
+
+    const postObject = {
+        title: title,
+        image: url,
+        questions: questions,
+        levels: levels
+    };
+
+    console.log(postObject);
+
+    promiseCreateQuiz = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", postObject);
+
+    promiseCreateQuiz.then(createQuizReady);
+    promiseCreateQuiz.catch(createQuizError);
+
+}
+
+function createQuizError(error){
+    alert("Erro na função postQuiz()");
+}
+
+function createQuizReady(response){
+
+    console.log(levels);
+
+    let quizId = response.data;
+
+    console.log(quizId);
+    alert(quizId);
+
+    localStorage.setItem("id", JSON.stringify(quizId));
 
     let html = ``;
     html += `
@@ -499,11 +780,19 @@ function createQuizReady(){
             <div class="ready">
                 <div class="title">Seu quizz está pronto!</div>
                 <div class="readyImage">
-                    <img src="https://s2.glbimg.com/oEHVlonqI0BlBphzUs_rJpTL7kE=/e.glbimg.com/og/ed/f/original/2020/01/23/mit-campus.jpg">                
-                    <div class="quizTitle">O quão Potterhead é você?</div>
+                    <img src="`;
+    html += url;
+    html += `
+        ">                
+        <div class="quizTitle">
+    `;
+    html += title;
+
+    html += `
+                    </div>
                 </div>
                 <div class="buttons">
-                    <button>Acessar Quizz</button>
+                    <button onclick="openQuiz(`+ quizId.toString() +`)">Acessar Quizz</button>
                     <button class="home" onclick="getQuizzes()">Voltar pra home</button>
                 </div>
             </div>

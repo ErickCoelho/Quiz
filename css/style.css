@@ -50,6 +50,12 @@ body {
     align-items: center;
 }
 
+.newQuiz .start .inputGroup .validationWarning{
+    color: #EC362D;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
 .newQuiz .title{
     color: #000;
     font-size: 20px;
