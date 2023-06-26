@@ -531,6 +531,9 @@ function validateQuizQuestions(){
         for(let j = 0; j < 3; j++){
             const currentVar = eval(`questionWrongAnswer${j+1}`);
             const currentVarUrl = eval(`questionWrongAnswerUrl${j+1}`);
+            console.log(`###### questionWrongAnswer${j+1}`)
+            console.log(currentVar);
+            console.log(currentVarUrl);
             
             if(currentVar !== ""){
                 if(validateUrl(currentVarUrl)){
@@ -544,6 +547,7 @@ function validateQuizQuestions(){
                     countWrongAnswers += 1;
                 }
                 else{
+                    console.log(`A url da resposta errada ${j+1} na pergunta ${i+1} foi preenchido de maneira errada!`);
                     alert(`A url da resposta errada ${j+1} na pergunta ${i+1} foi preenchido de maneira errada!`);
                     alert(currentVarUrl);
                     return;
@@ -807,6 +811,7 @@ function createQuizReady(response){
     addIdLocalStorage(quizId);
     console.log(localStorage.getItem('id'));
 
+
     let html = ``;
     html += `
         <div class="newQuiz">
@@ -826,7 +831,7 @@ function createQuizReady(response){
                     </div>
                 </div>
                 <div class="buttons">
-                    <button onclick="openQuiz(`+ quizId.toString() +`)">Acessar Quizz</button>
+                    <button onclick="openQuiz(`+ quizId +`)">Acessar Quizz</button>
                     <button class="home" onclick="getQuizzes()">Voltar pra home</button>
                 </div>
             </div>
