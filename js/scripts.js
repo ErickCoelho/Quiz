@@ -28,10 +28,11 @@ function errorGetQuizzes(error){
 
 function loadQuizzes(response){
     const storedData = localStorage.getItem("id");
-    const storedId = JSON.parse(storedData);
+    let storedId = [];
+    storedId = JSON.parse(storedData);
 
     let html = ``;
-    if(storedId.length !== 0){ //Com quizes próprios
+    if(storedId !== null && storedId.length !== 0){ //Com quizes próprios
         html=`
             <div class="quizesList">
                 
@@ -94,7 +95,7 @@ function loadQuizzes(response){
         //console.log(element);
         //console.log(storedId);
         //console.log(storedId);
-        if(!storedId.includes(element.id))
+        if(storedId == null || !storedId.includes(element.id))
             html+=`
                 <li data-id="${element.id}" onclick="getQuizId(this)">
                     <img src=${element.image}>                
